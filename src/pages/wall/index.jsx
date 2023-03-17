@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import Avatar from '@mui/material/Avatar';
 
-import postsMock from '../../../mock';
+import { postsMock, userMock } from '../../../mock';
 
 export default function Wall() {
   const [posts, setPosts] = useState([]);
+  const [userData, setUserData] = useState({});
   const [newPost, setNewPost] = useState('');
   const [disableButton, setDisableButton] = useState(true);
 
@@ -18,11 +20,15 @@ export default function Wall() {
     setPosts(updatedPosts);
   };
 
+  const fetchUser = () => {
+    setUserData(userMock);
+  };
+
   const handleAddPost = () => {
     const userPost = {
       id: 0,
       initials: 'GU',
-      user: 'Guest User',
+      user: userData.name,
       post: newPost,
     };
     setPosts([userPost, ...posts]);
@@ -32,6 +38,7 @@ export default function Wall() {
 
   useEffect(() => {
     fetchPosts();
+    fetchUser();
   }, []);
 
   useEffect(() => {
@@ -60,7 +67,7 @@ export default function Wall() {
       {posts.map((post) => (
 
         <div key={post.id}>
-          <div>{post.initials}</div>
+          <Avatar>{post.initials}</Avatar>
           <p>{post.user}</p>
           <p>{post.post}</p>
         </div>
