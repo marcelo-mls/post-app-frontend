@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
-import { userMock } from '../../../mock';
+import { fetchUserApi } from '../../services/api';
 import Container from './style';
 
 export default function PostForm() {
@@ -12,8 +12,9 @@ export default function PostForm() {
   const [newPost, setNewPost] = useState('');
   const [disableButton, setDisableButton] = useState(true);
 
-  const fetchUser = () => {
-    setUserData(userMock);
+  const fetchUser = async () => {
+    const user = await fetchUserApi();
+    setUserData(user.data);
   };
 
   const handleAddPost = () => {

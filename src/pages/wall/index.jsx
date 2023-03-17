@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
 
+import { fetchPostsApi } from '../../services/api';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
-import { postsMock } from '../../../mock';
 import Container from './style';
 
 export default function Wall() {
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = () => {
-    const updatedPosts = postsMock.map((post) => ({
-      ...post,
-      initials: (`${post.user[0]}${post.user[post.user.length - 1]}`).toUpperCase(),
-    }));
+  const fetchPosts = async () => {
+    const updatedPosts = await fetchPostsApi();
     setPosts(updatedPosts);
   };
 
