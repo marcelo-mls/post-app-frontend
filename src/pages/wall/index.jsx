@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import Avatar from '@mui/material/Avatar';
 
-import { postsMock, userMock } from '../../../mock';
+import PostForm from '../../components/postForm';
+import PostCard from '../../components/postCard';
+import { postsMock } from '../../../mock';
+import Container from './style';
 
 export default function Wall() {
   const [posts, setPosts] = useState([]);
-  const [userData, setUserData] = useState({});
-  const [newPost, setNewPost] = useState('');
-  const [disableButton, setDisableButton] = useState(true);
 
   const fetchPosts = () => {
     const updatedPosts = postsMock.map((post) => ({
@@ -20,58 +16,21 @@ export default function Wall() {
     setPosts(updatedPosts);
   };
 
-  const fetchUser = () => {
-    setUserData(userMock);
-  };
-
-  const handleAddPost = () => {
-    const userPost = {
-      id: 0,
-      initials: 'GU',
-      user: userData.name,
-      post: newPost,
-    };
-    setPosts([userPost, ...posts]);
-  };
-
-  const handleDisableButton = () => newPost.length > 3;
-
   useEffect(() => {
     fetchPosts();
-    fetchUser();
   }, []);
 
-  useEffect(() => {
-    setDisableButton(!handleDisableButton());
-  }, [newPost]);
-
   return (
-    <>
-      <div>
-        <TextField
-          id="filled-basic"
-          label="Type here..."
-          variant="filled"
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
-        />
-        <Button
-          variant="contained"
-          endIcon={<AddIcon />}
-          onClick={handleAddPost}
-          disabled={disableButton}
-        >
-          Post
-        </Button>
-      </div>
+    <Container>
+      <PostForm />
       {posts.map((post) => (
-
-        <div key={post.id}>
-          <Avatar>{post.initials}</Avatar>
-          <p>{post.user}</p>
-          <p>{post.post}</p>
-        </div>
+        <PostCard
+          key={post.id}
+          initials={post.initials}
+          user={post.user}
+          post={post.post}
+        />
       ))}
-    </>
+    </Container>
   );
 }
