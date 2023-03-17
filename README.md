@@ -1,2 +1,2 @@
-# post-app-frontend
-poston-on-the-wall-app-frontend
+# post-on-the-wall-frontend
+post-on-the-wall-frontend
