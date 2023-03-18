@@ -1,36 +1,44 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
+import { Container, InputContainer } from './style';
 import { fetchUserApi } from '../../services/api';
-import Container from './style';
+import AppContext from '../../context/AppContext';
 
 export default function PostForm() {
-  const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
   const [newPost, setNewPost] = useState('');
   const [disableButton, setDisableButton] = useState(true);
 
-  const fetchUser = async () => {
-    const user = await fetchUserApi();
-    setUserData(user.data);
+  const {
+    setUserDataGlobal,
+    postsGlobal,
+    setPostsGlobal,
+  } = useContext(AppContext);
+
+  const fetchApi = async () => {
+    const userResponse = await fetchUserApi();
+    setUserData(userResponse.data);
+    setUserDataGlobal(userResponse.data);
   };
 
   const handleAddPost = () => {
+    const arrName = userData.name.split(' ');
     const userPost = {
       id: 0,
-      initials: 'GU',
+      initials: (`${userData.name[0]}${arrName.at(-1)[0]}`).toUpperCase(),
       user: userData.name,
       post: newPost,
     };
-    setPosts([userPost, ...posts]);
+    setPostsGlobal([userPost, ...postsGlobal]);
   };
 
   const handleDisableButton = () => newPost.length > 3;
 
   useEffect(() => {
-    fetchUser();
+    fetchApi();
   }, []);
 
   useEffect(() => {
@@ -39,20 +47,25 @@ export default function PostForm() {
 
   return (
     <Container>
-      <TextField
-        id="filled-basic"
-        label="Type here..."
-        variant="filled"
-        value={newPost}
-        onChange={(e) => setNewPost(e.target.value)}
-      />
+      <InputContainer>
+        <TextField
+          id="filled-basic"
+          label="Type here..."
+          variant="filled"
+          multiline
+          rows={2}
+          fullWidth
+          value={newPost}
+          onChange={(e) => setNewPost(e.target.value)}
+        />
+      </InputContainer>
       <Button
         variant="contained"
         endIcon={<AddIcon />}
         onClick={handleAddPost}
         disabled={disableButton}
       >
-        Post
+        Post on the wall
       </Button>
     </Container>
   );

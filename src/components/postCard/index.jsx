@@ -1,7 +1,7 @@
 import Avatar from '@mui/material/Avatar';
 import PropTypes from 'prop-types';
 
-import Card from './style';
+import { Card, TextContainer } from './style';
 
 export default function PostCard(props) {
   const {
@@ -11,8 +11,10 @@ export default function PostCard(props) {
   return (
     <Card>
       <Avatar>{initials}</Avatar>
-      <p>{user}</p>
-      <p>{post}</p>
+      <TextContainer>
+        <h1>{user}</h1>
+        <p>{post}</p>
+      </TextContainer>
     </Card>
   );
 }

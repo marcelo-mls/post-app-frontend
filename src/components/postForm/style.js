@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
-const Container = styled.header`
-    padding: 0 2rem;
+export const Container = styled.header`
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px;
+    margin-bottom: 32px;
+    width: 100%;
 `;
 
-export default Container;
+export const InputContainer = styled.header`
+    width: 50%;
+`;

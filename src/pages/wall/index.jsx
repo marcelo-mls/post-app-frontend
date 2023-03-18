@@ -1,33 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
-import { fetchPostsApi } from '../../services/api';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
+import { fetchPostsApi } from '../../services/api';
 import Container from './style';
+import AppContext from '../../context/AppContext';
 
 export default function Wall() {
-  const [posts, setPosts] = useState([]);
+  const [postsToRender, setPostsToRender] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPosts = async () => {
-    const updatedPosts = await fetchPostsApi();
-    setPosts(updatedPosts);
+  const {
+    postsGlobal,
+    setPostsGlobal,
+  } = useContext(AppContext);
+
+  const fetchApi = async () => {
+    setIsLoading(true);
+    const response = await fetchPostsApi();
+
+    setPostsGlobal(response);
+    setPostsToRender(response);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    fetchApi();
+  }, [postsGlobal]);
 
   return (
     <Container>
       <PostForm />
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          initials={post.initials}
-          user={post.user}
-          post={post.post}
-        />
-      ))}
+      {
+        isLoading
+          ? <p>loading...</p>
+          : postsToRender.map((post) => (
+            <PostCard
+              key={post.id}
+              initials={post.initials}
+              user={post.user}
+              post={post.post}
+            />
+          ))
+      }
     </Container>
   );
 }
