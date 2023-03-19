@@ -29,7 +29,7 @@ export const SubContainer = styled.div`
   gap: 16px;
 `;
 
-export const Close = styled.div`
+export const Close = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;

@@ -1,3 +1,17 @@
+import API from './axios';
+
+export const getPosts = async () => {
+  try {
+    const response = API.get('posts');
+
+    return response;
+  } catch (error) {
+    console.error(error.message);
+
+    return error;
+  }
+};
+
 export async function fetchPostsApi() {
   const request = await fetch('https://rickandmortyapi.com/api/character');
   const response = await request.json();
