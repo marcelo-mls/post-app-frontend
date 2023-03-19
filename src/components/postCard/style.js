@@ -32,8 +32,10 @@ export const Delete = styled.button`
   right: 0;
   background-color: inherit;
 
+  transition: color .5s;
+
   :hover {
     color: #f44336;
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 `;

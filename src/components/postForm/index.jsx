@@ -4,41 +4,36 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
 import { Container, InputContainer } from './style';
-import { fetchUserApi } from '../../services/api';
+import { insertPost } from '../../services/api.posts';
 import AppContext from '../../context/AppContext';
 
 export default function PostForm() {
-  const [userData, setUserData] = useState({});
   const [newPost, setNewPost] = useState('');
   const [disableButton, setDisableButton] = useState(true);
 
   const {
-    setUserDataGlobal,
     postsGlobal,
     setPostsGlobal,
   } = useContext(AppContext);
 
-  const fetchApi = async () => {
-    const userResponse = await fetchUserApi();
-    setUserData(userResponse.data);
-    setUserDataGlobal(userResponse.data);
-  };
-
-  const handleAddPost = () => {
-    const arrName = userData.name.split(' ');
+  const handleAddPost = async () => {
     const userPost = {
-      id: 0,
-      initials: (`${userData.name[0]}${arrName.at(-1)[0]}`).toUpperCase(),
-      user: userData.name,
+      user: '6417407095c2f13e4c8a7d9a',
       post: newPost,
     };
-    setPostsGlobal([userPost, ...postsGlobal]);
+
+    const response = await insertPost(userPost);
+
+    if (response === 201) {
+      setPostsGlobal([userPost, ...postsGlobal]);
+      setNewPost('');
+    }
   };
 
   const handleDisableButton = () => newPost.length > 3;
 
   useEffect(() => {
-    fetchApi();
+
   }, []);
 
   useEffect(() => {

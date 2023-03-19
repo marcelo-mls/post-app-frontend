@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import Header from '../../components/header';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
-import { getPosts } from '../../services/api';
+import { getPosts } from '../../services/api.posts';
 import Container from './style';
 import AppContext from '../../context/AppContext';
 

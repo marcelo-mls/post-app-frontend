@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Card, TextContainer, Delete } from './style';
-import API from '../../services/axios';
+import { deletePost } from '../../services/api.posts';
 
 export default function PostCard(props) {
-  const handleDelete = (id) => {
-    API.delete
+  const handleDelete = async (id) => {
+    await deletePost(id);
   };
+
   const {
     id, initials, user, post,
   } = props;
 
   return (
     <Card>
-      <Delete onClick={() => console.log(id)}>
+      <Delete onClick={() => handleDelete(id)}>
         <DeleteIcon fontSize="small" />
       </Delete>
       <Avatar>{initials}</Avatar>

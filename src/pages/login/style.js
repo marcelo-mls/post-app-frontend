@@ -39,9 +39,11 @@ export const Close = styled.button`
   border-radius: 100%;
   background-color: #242424;
 
+  transition: background-color .5s;
+
   :hover {
     transform: scale(1.05);
-    background-color: #1a1a1a;
+    background-color: #f44336;
   }
 
   :active {
