@@ -4,7 +4,7 @@ const port = '3001';
 
 const configOptions = {
   baseURL: `http://localhost:${port}/`,
-  timeout: 10000,
+  timeout: 5000,
   headers: { 'Content-Type': 'application/json' },
 };
 

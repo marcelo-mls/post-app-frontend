@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import Header from '../../components/header';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
-import { fetchPostsApi } from '../../services/api';
+import { getPosts } from '../../services/api';
 import Container from './style';
 import AppContext from '../../context/AppContext';
 
@@ -18,7 +18,8 @@ export default function Wall() {
 
   const fetchApi = async () => {
     setIsLoading(true);
-    const response = await fetchPostsApi();
+
+    const response = await getPosts();
 
     setPostsGlobal(response);
     setPostsToRender(response);
@@ -39,10 +40,13 @@ export default function Wall() {
           ? <p>loading...</p>
           : postsToRender.map((post) => (
             <PostCard
-              key={post.id}
-              initials={post.initials}
-              user={post.user}
+              // eslint-disable-next-line no-underscore-dangle
+              key={post._id}
+              initials={post.user.initials}
+              user={post.user.name}
               post={post.post}
+              // eslint-disable-next-line no-underscore-dangle
+              id={post._id}
             />
           ))
       }
