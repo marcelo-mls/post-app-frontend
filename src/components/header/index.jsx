@@ -5,16 +5,16 @@ import LogoutOptions from '../logoutOptions';
 import { Container, Text } from './style';
 
 export default function Header() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
 
   return (
     <Container>
-      <Text onClick={() => setIsLogged(!isLogged)}>
+      <Text>
         WALL APP
       </Text>
       {
-        isLogged
-          ? <LogoutOptions />
+        userData
+          ? <LogoutOptions onLogout={setUserData} />
           : <LoginOptions />
       }
     </Container>
