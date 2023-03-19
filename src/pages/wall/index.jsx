@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 
+import Header from '../../components/header';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
 import { fetchPostsApi } from '../../services/api';
@@ -29,9 +30,11 @@ export default function Wall() {
   }, [postsGlobal]);
 
   return (
-    <Container>
-      <PostForm />
-      {
+    <>
+      <Header />
+      <Container>
+        <PostForm />
+        {
         isLoading
           ? <p>loading...</p>
           : postsToRender.map((post) => (
@@ -43,6 +46,7 @@ export default function Wall() {
             />
           ))
       }
-    </Container>
+      </Container>
+    </>
   );
 }

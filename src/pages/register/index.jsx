@@ -2,14 +2,20 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { useNavigate } from 'react-router-dom';
 
-import { MainContainer, Container, SubContainer } from './style';
+import {
+  MainContainer, Container, SubContainer, Close,
+} from '../login/style';
 
 export default function Register() {
+  const navigate = useNavigate();
+
   return (
     <MainContainer>
       <Container>
 
+        <Close onClick={() => navigate('/wall')}>X</Close>
         <SubContainer>
           <p>Sign Up for Wall App</p>
           <TextField label="Name" variant="outlined" />
@@ -30,6 +36,7 @@ export default function Register() {
             variant="contained"
             color="success"
             endIcon={<LoginIcon />}
+            onClick={() => navigate('/wall/login')}
           >
             Login
           </Button>

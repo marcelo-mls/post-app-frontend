@@ -1,9 +1,7 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import './App.css';
-import Header from './components/header';
-import Wall from './pages/wall';
 import AppProvider from './context/AppProvider';
+import Router from './router/routes';
 
 const myTheme = createTheme({
   palette: { mode: 'dark' },
@@ -13,8 +11,7 @@ function App() {
   return (
     <AppProvider>
       <ThemeProvider theme={myTheme}>
-        <Header />
-        <Wall />
+        <Router />
       </ThemeProvider>
     </AppProvider>
   );
