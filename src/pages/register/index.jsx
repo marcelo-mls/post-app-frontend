@@ -6,9 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 import { insertUser } from '../../services/api.users';
-import {
-  MainContainer, Container, SubContainer, Close,
-} from '../login/style';
+import { MainContainer, Container, Close } from '../login/style';
 
 export default function Register() {
   const [userName, setUserName] = useState('');
@@ -37,22 +35,23 @@ export default function Register() {
     const newUser = {
       name: userName,
       initials: getInitials(userName),
-      email,
+      email: email.toLowerCase(),
       password,
     };
 
     const response = await insertUser(newUser);
 
-    if (response === 201) {
+    if (response.status === 201) {
       setFeedBack('Successfully created. Login to continue.');
-
       setUserName('');
-      setPassword('');
       setEmail('');
+    } else if (response === 'Request failed with status code 409') {
+      setFeedBack('User already exists');
     } else {
       setFeedBack('Something went wrong. Try again');
-      setPassword('');
     }
+
+    setPassword('');
   };
 
   const handleDisableButton = () => {
@@ -73,7 +72,7 @@ export default function Register() {
       <Container>
 
         <Close onClick={() => navigate('/wall')}>X</Close>
-        <SubContainer>
+        <div>
           <p>{feedback}</p>
           <TextField
             label="Name"
@@ -103,9 +102,9 @@ export default function Register() {
           >
             Sign Up
           </Button>
-        </SubContainer>
+        </div>
 
-        <SubContainer>
+        <div>
           <p>Already have an account?</p>
           <Button
             variant="contained"
@@ -115,7 +114,7 @@ export default function Register() {
           >
             Login
           </Button>
-        </SubContainer>
+        </div>
 
       </Container>
     </MainContainer>

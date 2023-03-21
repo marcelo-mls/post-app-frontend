@@ -7,8 +7,11 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color: #fff;
+    /* background-color: #242424; */
+    /* background-color: #1a1a1a; */
+    background-color: #121212;
+    /* background-color: #070600; */
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;

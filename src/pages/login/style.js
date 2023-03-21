@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MainContainer = styled.div`
+export const MainContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,16 +17,16 @@ export const Container = styled.div`
   height: 75%;
   min-width: 350px;
   min-height: 500px;
-  background-color: #1a1a1a;
+  background-color: #121212;
   border-radius: 16px;
   position: relative;
-`;
 
-export const SubContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  gap: 16px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 16px;
+  }
 `;
 
 export const Close = styled.button`
@@ -43,7 +43,7 @@ export const Close = styled.button`
 
   :hover {
     transform: scale(1.05);
-    background-color: #f44336;
+    background-color: #D32F2F;
   }
 
   :active {

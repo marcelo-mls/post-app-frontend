@@ -1,11 +1,10 @@
-import { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import LoginOptions from '../loginOptions';
 import LogoutOptions from '../logoutOptions';
 import { Container, Text } from './style';
 
-export default function Header() {
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
+export default function Header(props) {
+  const { userData, onLogout } = props;
 
   return (
     <Container>
@@ -14,9 +13,14 @@ export default function Header() {
       </Text>
       {
         userData
-          ? <LogoutOptions onLogout={setUserData} />
+          ? <LogoutOptions userName={userData.name} onLogout={onLogout} />
           : <LoginOptions />
       }
     </Container>
   );
 }
+
+Header.propTypes = {
+  userData: PropTypes.object,
+  onLogout: PropTypes.func,
+}.isRequired;

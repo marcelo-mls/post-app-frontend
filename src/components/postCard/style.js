@@ -5,7 +5,7 @@ export const Card = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 25px;
+  margin-bottom: 24px;
   width: 75%;
   border-bottom: 1px solid #1a1a1a;
 `;
@@ -31,11 +31,12 @@ export const Delete = styled.button`
   top: 0;
   right: 0;
   background-color: inherit;
+  color: #242424;
 
   transition: color .5s;
 
   :hover {
-    color: #f44336;
+    color: #D32F2F;
     transform: scale(1.1);
   }
 `;

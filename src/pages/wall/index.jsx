@@ -1,54 +1,60 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../../components/header';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
 import { getPosts } from '../../services/api.posts';
 import Container from './style';
-import AppContext from '../../context/AppContext';
 
 export default function Wall() {
   const [postsToRender, setPostsToRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    postsGlobal,
-    setPostsGlobal,
-  } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
 
   const fetchApi = async () => {
     setIsLoading(true);
-
     const response = await getPosts();
-
-    setPostsGlobal(response);
-    setPostsToRender(response);
+    setPostsToRender(response.data);
     setIsLoading(false);
+  };
+
+  const handleLogout = async () => {
+    localStorage.removeItem('userData');
+    setUserData(JSON.parse(localStorage.getItem('userData')));
+    await fetchApi();
+    navigate('/wall');
   };
 
   useEffect(() => {
     fetchApi();
-  }, [postsGlobal]);
+    setUserData(JSON.parse(localStorage.getItem('userData')));
+  }, []);
 
   return (
     <>
-      <Header />
+      <Header userData={userData} onLogout={handleLogout} />
       <Container>
-        <PostForm />
         {
-        isLoading
-          ? <p>loading...</p>
-          : postsToRender.map((post) => (
-            <PostCard
-              // eslint-disable-next-line no-underscore-dangle
-              key={post._id}
-              initials={post.user.initials}
-              user={post.user.name}
-              post={post.post}
-              // eslint-disable-next-line no-underscore-dangle
-              id={post._id}
-            />
-          ))
+          userData && <PostForm userData={userData} />
+        }
+        {
+          isLoading
+            ? <p>loading...</p>
+            : postsToRender.map((post) => (
+              <PostCard
+                key={post._id}
+                initials={post.user.initials}
+                user={post.user.name}
+                post={post.post}
+                id={post._id}
+                userId={post.user._id}
+                userData={userData}
+              />
+            ))
       }
       </Container>
     </>

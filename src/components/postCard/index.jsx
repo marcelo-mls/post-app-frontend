@@ -11,14 +11,21 @@ export default function PostCard(props) {
   };
 
   const {
-    id, initials, user, post,
+    id,
+    initials,
+    user,
+    post,
+    userId,
+    userData,
   } = props;
 
   return (
     <Card>
-      <Delete onClick={() => handleDelete(id)}>
-        <DeleteIcon fontSize="small" />
-      </Delete>
+      { userData && userData._id === userId && (
+        <Delete onClick={() => handleDelete(id)}>
+          <DeleteIcon fontSize="small" />
+        </Delete>
+      )}
       <Avatar>{initials}</Avatar>
       <TextContainer>
         <h1>{user}</h1>
@@ -33,4 +40,6 @@ PostCard.propTypes = {
   initials: PropTypes.string,
   user: PropTypes.string,
   post: PropTypes.string,
+  userId: PropTypes.string,
+  userData: PropTypes.object,
 }.isRequired;

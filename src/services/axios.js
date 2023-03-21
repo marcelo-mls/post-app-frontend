@@ -8,11 +8,6 @@ const configOptions = {
   headers: { 'Content-Type': 'application/json' },
 };
 
-// const tokenJWT = localStorage.getItem('token');
-// if (tokenJWT) {
-//   headers.Authorization = `Bearer ${tokenJWT}`;
-// }
-
 const API = axios.create(configOptions);
 
 export default API;

@@ -4,7 +4,7 @@ export const getPosts = async () => {
   try {
     const response = await API.get('posts');
 
-    return response.data;
+    return response;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(`${error.name}: ${error.message}`);
@@ -15,21 +15,28 @@ export const getPosts = async () => {
 
 export const insertPost = async (payload) => {
   try {
-    const response = await API.post('posts', payload);
-    return response.status;
+    const { token } = JSON.parse(localStorage.getItem('userData'));
+
+    const response = await API.post('posts', payload, { headers: { Authorization: token } });
+
+    return response;
   } catch (error) {
     // eslint-disable-next-line no-console
-    return console.error(`${error.name}: ${error.message}`);
+    console.error(`${error.name}: ${error.message}`);
+    return error.message;
   }
 };
 
 export const deletePost = async (id) => {
   try {
-    const response = await API.delete(`posts/${id}`);
+    const { token } = JSON.parse(localStorage.getItem('userData'));
 
-    return response.data;
+    const response = await API.delete(`posts/${id}`, { headers: { Authorization: token } });
+
+    return response;
   } catch (error) {
     // eslint-disable-next-line no-console
-    return console.error(`${error.name}: ${error.message}`);
+    console.error(`${error.name}: ${error.message}`);
+    return error.message;
   }
 };

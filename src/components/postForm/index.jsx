@@ -1,40 +1,25 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import PropTypes from 'prop-types';
 
 import { Container, InputContainer } from './style';
 import { insertPost } from '../../services/api.posts';
-import AppContext from '../../context/AppContext';
 
-export default function PostForm() {
+export default function PostForm(props) {
   const [newPost, setNewPost] = useState('');
   const [disableButton, setDisableButton] = useState(true);
 
-  const {
-    postsGlobal,
-    setPostsGlobal,
-  } = useContext(AppContext);
-
-  const handleAddPost = async () => {
-    const userPost = {
-      user: '6417407095c2f13e4c8a7d9a',
-      post: newPost,
-    };
-
-    const response = await insertPost(userPost);
-
-    if (response === 201) {
-      setPostsGlobal([userPost, ...postsGlobal]);
-      setNewPost('');
-    }
-  };
+  const { userData } = props;
 
   const handleDisableButton = () => newPost.length > 3;
 
-  useEffect(() => {
-
-  }, []);
+  const handleAddPost = async () => {
+    const userPost = { user: userData._id, post: newPost };
+    const { status } = await insertPost(userPost);
+    if (status === 201) { setNewPost(''); }
+  };
 
   useEffect(() => {
     setDisableButton(!handleDisableButton());
@@ -65,3 +50,7 @@ export default function PostForm() {
     </Container>
   );
 }
+
+PostForm.propTypes = {
+  userData: PropTypes.object,
+}.isRequired;

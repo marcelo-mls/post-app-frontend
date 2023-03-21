@@ -6,9 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 import { getUser } from '../../services/api.users';
-import {
-  MainContainer, Container, SubContainer, Close,
-} from './style';
+import { MainContainer, Container, Close } from './style';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,29 +18,26 @@ function Login() {
 
   const handleLogin = async () => {
     const response = await getUser({ email, password });
+
     if (response.status === 200) {
       localStorage.setItem('userData', JSON.stringify(response.data));
-
-      setPassword('');
       setEmail('');
       navigate('/wall');
     } else if (response.status === 401) {
       setFeedBack('Incorrect data');
-      setEmail('');
-      setPassword('');
     } else if (response === 'Request failed with status code 404') {
       setFeedBack('User does not exist. Sign up to continue');
-      setPassword('');
     } else {
       setFeedBack('Something went wrong. Try again');
-      setPassword('');
     }
+
+    setPassword('');
   };
 
   const handleDisableButton = () => {
     const emailRegex = /\S+@\S+\.\S+/;
 
-    return (emailRegex.test(email) && password.length >= 4);
+    return (emailRegex.test(email) && password.length >= 6);
   };
 
   useEffect(() => {
@@ -52,8 +47,10 @@ function Login() {
   return (
     <MainContainer>
       <Container>
+
         <Close onClick={() => navigate('/wall')}>X</Close>
-        <SubContainer>
+
+        <div>
           <p>{feedback}</p>
           <TextField
             label="e-mail"
@@ -79,9 +76,9 @@ function Login() {
           >
             Login
           </Button>
-        </SubContainer>
+        </div>
 
-        <SubContainer>
+        <div>
           <p>{'Don\'t have an account?'}</p>
           <Button
             variant="contained"
@@ -91,7 +88,7 @@ function Login() {
           >
             Sign Up for Wall App
           </Button>
-        </SubContainer>
+        </div>
 
       </Container>
     </MainContainer>

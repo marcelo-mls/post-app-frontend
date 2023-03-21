@@ -6,8 +6,9 @@ export const Container = styled.header`
   flex-basis: auto;
   justify-content: space-between;
   align-items: center;
-  background-color: #1a1a1a;
+  background-color: #070600;
   padding: 0 3rem;
+  margin-bottom: 16px;
 `;
 
 export const Text = styled.p`
