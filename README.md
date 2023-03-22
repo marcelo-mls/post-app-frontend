@@ -58,12 +58,12 @@ These instructions will provide you a complete copy of the project up and runnin
 
 1. Clone the repository:
 ```sh
-git clone git@github.com:tryber/sd-022-b-project-delivery-app.git.
+git clone git@github.com:marcelo-mls/post-on-the-wall-frontend.git
 ```
 
 2. Enter the repository folder you just cloned:
 ```sh
-cd sd-022-b-project-delivery-app
+cd post-on-the-wall-frontend
 ```
 
 3. Install the dependencies and start the project:
