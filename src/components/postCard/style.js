@@ -8,6 +8,33 @@ export const Card = styled.div`
   margin-bottom: 24px;
   width: 75%;
   border-bottom: 1px solid #1a1a1a;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeIn 0.8s ease forwards;
+
+  &.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+    opacity: 1;
+    transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
+
 `;
 
 export const TextContainer = styled.div`

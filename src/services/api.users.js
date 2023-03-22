@@ -8,9 +8,8 @@ export const getUser = async (payload) => {
     return response;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(`${error.name}: ${error.message}`, friendlyError(error));
-    return error.message;
-    // return friendlyError(error);
+    console.error(`${error.name}: ${error.message}`);
+    return friendlyError(error) || error;
   }
 };
 
@@ -22,6 +21,6 @@ export const insertUser = async (payload) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(`${error.name}: ${error.message}`);
-    return error.message;
+    return friendlyError(error) || error;
   }
 };

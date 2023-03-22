@@ -1,4 +1,5 @@
 import API from './axios';
+import friendlyError from './friendlyError';
 
 export const getPosts = async () => {
   try {
@@ -7,7 +8,7 @@ export const getPosts = async () => {
     return response;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(`${error.name}: ${error.message}`);
+    console.error(`${error.name}: ${error.message}`, friendlyError(error));
 
     return [];
   }
@@ -23,7 +24,7 @@ export const insertPost = async (payload) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(`${error.name}: ${error.message}`);
-    return error.message;
+    return friendlyError(error) || error;
   }
 };
 
@@ -37,6 +38,6 @@ export const deletePost = async (id) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(`${error.name}: ${error.message}`);
-    return error.message;
+    return friendlyError(error) || error;
   }
 };

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header';
 import PostForm from '../../components/postForm';
 import PostCard from '../../components/postCard';
-import { getPosts } from '../../services/api.posts';
+import { getPosts, insertPost, deletePost } from '../../services/api.posts';
 import Container from './style';
 
 export default function Wall() {
@@ -16,10 +16,8 @@ export default function Wall() {
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
 
   const fetchApi = async () => {
-    setIsLoading(true);
     const response = await getPosts();
     setPostsToRender(response.data);
-    setIsLoading(false);
   };
 
   const handleLogout = async () => {
@@ -29,9 +27,25 @@ export default function Wall() {
     navigate('/wall');
   };
 
+  const handleAddPost = async (newPost, setNewPost) => {
+    const userPost = { user: userData._id, post: newPost };
+    const { status } = await insertPost(userPost);
+    if (status === 201) {
+      await fetchApi();
+      setNewPost('');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    await deletePost(id);
+    await fetchApi();
+  };
+
   useEffect(() => {
+    setIsLoading(true);
     fetchApi();
     setUserData(JSON.parse(localStorage.getItem('userData')));
+    setIsLoading(false);
   }, []);
 
   return (
@@ -39,7 +53,7 @@ export default function Wall() {
       <Header userData={userData} onLogout={handleLogout} />
       <Container>
         {
-          userData && <PostForm userData={userData} />
+          userData && <PostForm onAddPost={handleAddPost} />
         }
         {
           isLoading
@@ -53,6 +67,7 @@ export default function Wall() {
                 id={post._id}
                 userId={post.user._id}
                 userData={userData}
+                onDelete={handleDelete}
               />
             ))
       }

@@ -5,8 +5,8 @@ function friendlyError(error) {
     method: error.config.method,
     url: error.config.url,
     code: error.code,
-    status: error.response.status,
-    statusText: error.response.statusText,
+    status: error.response.status || error.request.status,
+    statusText: error.response.statusText || error.request.statusText,
   };
 }
 

@@ -25,7 +25,7 @@ function Login() {
       navigate('/wall');
     } else if (response.status === 401) {
       setFeedBack('Incorrect data');
-    } else if (response === 'Request failed with status code 404') {
+    } else if (response.status === 404) {
       setFeedBack('User does not exist. Sign up to continue');
     } else {
       setFeedBack('Something went wrong. Try again');

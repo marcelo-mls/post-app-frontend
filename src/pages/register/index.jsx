@@ -45,7 +45,7 @@ export default function Register() {
       setFeedBack('Successfully created. Login to continue.');
       setUserName('');
       setEmail('');
-    } else if (response === 'Request failed with status code 409') {
+    } else if (response.status === 409) {
       setFeedBack('User already exists');
     } else {
       setFeedBack('Something went wrong. Try again');

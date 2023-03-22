@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import PropTypes from 'prop-types';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Card, TextContainer, Delete } from './style';
-import { deletePost } from '../../services/api.posts';
 
 export default function PostCard(props) {
-  const handleDelete = async (id) => {
-    await deletePost(id);
-  };
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const {
     id,
@@ -17,12 +15,18 @@ export default function PostCard(props) {
     post,
     userId,
     userData,
+    onDelete,
   } = props;
 
+  const handleRemoveCard = () => {
+    setIsRemoving(true);
+    setTimeout(() => onDelete(id), 300);
+  };
+
   return (
-    <Card>
+    <Card className={isRemoving && 'fade-out'}>
       { userData && userData._id === userId && (
-        <Delete onClick={() => handleDelete(id)}>
+        <Delete onClick={handleRemoveCard}>
           <DeleteIcon fontSize="small" />
         </Delete>
       )}
