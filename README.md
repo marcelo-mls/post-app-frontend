@@ -19,7 +19,7 @@ To write a post on the wall, the user needs to login.
   ### Built With
   </summary>
   
-  For the development of this app was chosen [`REACT`](https://react.dev/), [`Styled Components`](https://styled-components.com/) and [`Material UI`](https://mui.com/material-ui/getting-started/overview/). Combining these three features makes it easy to build efficient front-end apps with a consistent, modern look and feel.
+  For the development of this app was chosen [`React`](https://react.dev/), [`Styled Components`](https://styled-components.com/) and [`Material UI`](https://mui.com/material-ui/getting-started/overview/). Combining these three features makes it easy to build efficient front-end apps with a consistent, modern look and feel.
   
   <img height="60" align="left" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
   <p align="rigth">React is a popular and widely used JavaScript library known for its flexibility, modularity and efficiency. React lets you easily create reusable UI components.</p>
