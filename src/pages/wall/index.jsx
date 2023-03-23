@@ -8,12 +8,11 @@ import { getPosts, insertPost, deletePost } from '../../services/api.posts';
 import Container from './style';
 
 export default function Wall() {
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
   const [postsToRender, setPostsToRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
 
   const fetchApi = async () => {
     const response = await getPosts();
