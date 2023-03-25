@@ -1,9 +1,12 @@
 # Post on the Wall - Frontend
 > This is a frontend part of a Full Stack application.
 
-Link to application backend:
-- Backend with `Node`: [post-on-the-wall/backend/node](https://github.com/marcelo-mls/post-on-the-wall-backend)
+<br />
 
+Link to backend options for the application:
+- Backend with `Node`: [post-on-the-wall/backend/node](https://github.com/marcelo-mls/post-on-the-wall-backend)
+- Backend with `Django Rest Framework`: [post-on-the-wall/backend/django](https://github.com/marcelo-mls/post-on-the-wall-backend-drf/tree/main)
+> one option excludes the other
 
 ## Description
 
