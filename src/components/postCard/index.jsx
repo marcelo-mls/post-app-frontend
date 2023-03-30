@@ -25,7 +25,7 @@ export default function PostCard(props) {
 
   return (
     <Card className={isRemoving && 'fade-out'}>
-      { userData && userData._id === userId && (
+      { userData && userData.id === userId && (
         <Delete onClick={handleRemoveCard}>
           <DeleteIcon fontSize="small" />
         </Delete>

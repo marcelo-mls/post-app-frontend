@@ -1,4 +1,4 @@
-<h1>Post on the Wall - Frontend
+<h1 id="title" >Post on the Wall - Frontend
   <img align="center" alt="JavaScript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
   <img align="center" alt="React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
 </h1>
@@ -60,7 +60,7 @@ To write a post on the wall, the user needs to login.
 
 These instructions will provide you a complete copy of the project up and running on your local machine for development purposes.
 
-:warning: The [backend](https://github.com/marcelo-mls/post-on-the-wall-backend) must be running on port 3001.
+:warning: The [backend](#title) must be running on port 8000.
 
 
 1. Clone the repository:

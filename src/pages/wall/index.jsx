@@ -27,7 +27,7 @@ export default function Wall() {
   };
 
   const handleAddPost = async (newPost, setNewPost) => {
-    const userPost = { user: userData._id, post: newPost };
+    const userPost = { user: userData.id, post: newPost };
     const { status } = await insertPost(userPost);
     if (status === 201) {
       await fetchApi();
@@ -59,12 +59,12 @@ export default function Wall() {
             ? <p>loading...</p>
             : postsToRender.map((post) => (
               <PostCard
-                key={post._id}
+                key={post.id}
                 initials={post.user.initials}
                 user={post.user.name}
                 post={post.post}
-                id={post._id}
-                userId={post.user._id}
+                id={post.id}
+                userId={post.user.id}
                 userData={userData}
                 onDelete={handleDelete}
               />

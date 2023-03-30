@@ -3,7 +3,7 @@ import friendlyError from './friendlyError';
 
 export const getPosts = async () => {
   try {
-    const response = await API.get('posts');
+    const response = await API.get('posts/');
 
     return response;
   } catch (error) {
